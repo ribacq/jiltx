@@ -1,0 +1,198 @@
+%Un package pour les gouverner tous : « JÏpkg »
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{jipkg}[2016/05/02 JÏpkg (+nocolor)]
+
+%====== Options
+\newif\if@geometry \@geometrytrue
+\DeclareOption{geometry}{\@geometryfalse}
+\newif\if@maths \@mathsfalse
+\DeclareOption{maths}{\@mathstrue}
+\newif\if@dauphin \@dauphinfalse
+\DeclareOption{dauphin}{\@dauphintrue}
+\newif\if@fnsymbol \@fnsymboltrue
+\DeclareOption{fnsymbol}{\@fnsymbolfalse}
+\newif\if@color \@colortrue
+\DeclareOption{nocolor}{\@colorfalse}
+
+
+\ProcessOptions\relax
+
+\if@geometry %Activé par défaut
+  \RequirePackage[top=2.5cm, right=2.5cm, bottom=2.5cm, left=2.5cm]{geometry}
+\fi
+
+\if@maths
+  \RequirePackage{amsmath}
+  \RequirePackage{amssymb}
+  \RequirePackage{mathrsfs}
+\fi
+
+\if@fnsymbol %Activé par défaut
+  \renewcommand{\thefootnote}{\textcolor{Red}{\fnsymbol{footnote}}}
+\fi
+
+%====== Packages toujours inclus
+\RequirePackage[english, french]{babel}
+\RequirePackage{graphicx}
+\RequirePackage[usenames, dvipsnames]{xcolor}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{soul}
+\sethlcolor{Dandelion}
+\RequirePackage{fontspec}
+\RequirePackage{xunicode}
+\RequirePackage{xltxtra}
+\RequirePackage{todonotes}
+\RequirePackage{lipsum}
+\RequirePackage{multicol}
+
+%====== Polices
+\defaultfontfeatures{
+  Ligatures={TeX}
+}
+\setmainfont{Linux Libertine O}
+\setsansfont{Linux Biolinum O}
+
+%Polices des documents Naheulbeuk
+\if@dauphin
+  \setmainfont[AutoFakeBold=1.5]{Dauphin}
+  \newfontfamily\benfont{Benguiat Bk BT}
+  \newfontfamily\insfont{Insula}
+  \newfontfamily\litfont{Lithograph}
+  \newfontfamily\brefont[AutoFakeSlant=0.2]{Bremen Bd BT}
+\fi
+
+%====== Commande : \jiimgsmp[relative width]{label}{path}{caption}
+\newcommand{\jiimgsmp}[4][0.8]{
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=#1\linewidth, clip]{#3}
+  \caption{#4}
+  \label{#2}
+\end{figure}
+}
+
+%====== Commande : \remarque
+\newcounter{remarque}
+\setcounter{remarque}{0}
+\newcommand{\remarque}[2][Remarque]{
+  \addtocounter{remarque}{+1}
+  \medskip
+  \begin{center}
+    \fbox{
+	\begin{minipage}{0.8\textwidth}
+	  \textbf{#1 \arabic{remarque} :} #2
+	\end{minipage}
+      }
+  \end{center}
+  \medskip
+}
+
+%====== Commande : \jialert
+\newcommand{\jialert}[1]{
+  \medskip
+  \begin{center}
+    \fcolorbox{\colThree}{\colFour}{
+      \begin{minipage}{0.8\textwidth}
+	\centering
+	\sffamily{\textcolor{\colFive}{#1}}
+      \end{minipage}
+    }
+  \end{center}
+  \medskip
+}
+
+%====== Commande : \Fin d'une histoire
+\RequirePackage{frcursive}
+\newcommand{\Fin}[1][Fin]{
+ \begin{center}
+  \begin{Huge}
+   \uline{\textcursive{#1}}
+  \end{Huge}
+ \end{center}
+}
+
+%====== Hyperref
+\RequirePackage{hyperref}
+\newcommand{\jihypersetup}[2]{
+  \hypersetup{
+    pdftitle={#1},
+    bookmarks={true},
+    bookmarksnumbered={true},
+    pdfauthor={#2},
+    allbordercolors={1 1 1}
+  }
+}
+
+%====== Listings
+\RequirePackage{listings}
+\lstset{
+%Encodage
+inputencoding=utf8,
+%Espaces, numération, apparence générale
+tabsize=4,
+numbers=left,
+numbersep=5pt,
+frame=l,
+breaklines=true,
+%Polices et couleurs
+numberstyle=\ttfamily\color{Periwinkle},
+basicstyle=\ttfamily\small,
+keywordstyle=\bfseries\color{Violet},
+identifierstyle=\color{Brown},
+commentstyle=\color{OliveGreen},
+stringstyle=\color{Gray}
+}
+\renewcommand{\lstlistingname}{Extrait de code}
+\renewcommand{\lstlistlistingname}{Liste des extraits de code}
+
+%====== Commandes de sectionnement
+\def\colOne{Black}
+\def\colTwo{Black}
+\def\colThree{Black}
+\def\colFour{Black}
+\def\colFive{Black}
+\if@color
+  \def\colOne{BlueViolet}
+  \def\colTwo{Violet}
+  \def\colThree{Periwinkle}
+  \def\colFour{Aquamarine}
+  \def\colFive{Brown}
+\fi
+
+\newcommand{\jichap}[1]{\textcolor{\colOne}{\chapter{\sffamily{#1}}}}
+\newcommand{\jichapa}[1]{
+  \textcolor{\colOne}{\chapter*{\sffamily{#1}}}\addcontentsline{toc}{chapter}{\sffamily{#1}}
+}
+
+\newcommand{\jisec}[1]{\textcolor{\colOne}{\section{\sffamily{#1}}}}
+\newcommand{\jiseca}[1]{
+  \textcolor{\colOne}{\section*{\sffamily{#1}}}
+  \addcontentsline{toc}{section}{\sffamily{#1}}
+}
+
+\newcommand{\jissec}[1]{\textcolor{\colTwo}{\subsection{\sffamily{#1}}}}
+\newcommand{\jisseca}[1]{
+  \textcolor{\colTwo}{\subsection*{\sffamily{#1}}}
+  \addcontentsline{toc}{subsection}{\sffamily{#1}}
+}
+
+\newcommand{\jisssec}[1]{\textcolor{\colThree}{\subsubsection{\sffamily{#1}}}}
+\newcommand{\jissseca}[1]{
+  \textcolor{\colThree}{\subsubsection*{\sffamily{#1}}}
+  \addcontentsline{toc}{subsubsection}{\sffamily{#1}}
+}
+
+\newcommand{\jipar}[1]{\textcolor{\colFour}{\paragraph{\sffamily{#1}}}}
+\newcommand{\jipara}[1]{
+  \textcolor{\colThree}{\paragraph*{\sffamily{#1}}}
+  \addcontentsline{toc}{paragraph}{\sffamily{#1}}
+}
+
+\newcommand{\jispar}[1]{\textcolor{\colFour}{\subparagraph{\sffamily{#1}}}}
+\newcommand{\jispara}[1]{
+  \textcolor{\colThree}{\subparagraph*{\sffamily{#1}}}
+  \addcontentsline{toc}{subparagraph}{\sffamily{#1}}
+}
+
+%====== Fin du package JÏpkg
+\endinput

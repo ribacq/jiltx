@@ -1,0 +1,31 @@
+\documentclass[12pt, a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+
+\begin{document}
+%- Gestion des en-têtes et pieds-de-page -%
+\pagestyle{fancy}
+\lhead{Chapitre \thechapter}
+\chead{\rightmark}
+\rhead{Section \thesection}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+%- Titre -%
+\title{Titre}
+\author{}
+\date{\today}
+\maketitle
+
+%- Table des matières -%
+\renewcommand{\contentsname}{Contenu}
+\tableofcontents
+\newpage
+
+%- Début du document -%
+
+%- Fin du document -%
+\end{document}
