@@ -1,27 +1,24 @@
 \documentclass[a4paper, 11pt]{lettre}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[francais]{babel}
-\usepackage{lmodern}
+\usepackage[geometry]{jipkg}
 
 \begin{document}
 \begin{letter}{Adresse du destinataire}
 
-\name{}
-\address{}
-\date{\today}
-\email{}
-\lieu{}
-\telephone{}
+\name{Mon nom}
+\address{22}
+\date{le \today}
+\email{moi@plop.fr}
+\lieu{À ville}
+\telephone{+33…}
 \fax{}
 
 \def\concname{Objet : }
 \conc{L'objet}
 \opening{Madame, Monsieur,}
 
-Le texte
+\lipsum
 
-\signature{Quentin RIBAC}
+\signature{Mon nom}
 
 \closing{Cordialement}
 

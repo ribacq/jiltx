@@ -1,6 +1,6 @@
 %Un package pour les gouverner tous : « JÏpkg »
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{jipkg}[2016/05/02 JÏpkg (+nocolor)]
+\ProvidesPackage{jipkg}[2016/06/29 JÏpkg (fix for colors)]
 
 %====== Options
 \newif\if@geometry \@geometrytrue
@@ -159,38 +159,57 @@ stringstyle=\color{Gray}
   \def\colFive{Brown}
 \fi
 
-\newcommand{\jichap}[1]{\textcolor{\colOne}{\chapter{\sffamily{#1}}}}
+%Chapter
+\newcommand{\jichap}[1]{
+  {\color{\colOne} \chapter{\sffamily{#1}}}
+}
 \newcommand{\jichapa}[1]{
-  \textcolor{\colOne}{\chapter*{\sffamily{#1}}}\addcontentsline{toc}{chapter}{\sffamily{#1}}
+  {\color{\colOne} \chapter*{\sffamily{#1}}}
+  \addcontentsline{toc}{chapter}{\sffamily{#1}}
 }
 
-\newcommand{\jisec}[1]{\textcolor{\colOne}{\section{\sffamily{#1}}}}
+%Section
+\newcommand{\jisec}[1]{
+  {\color{\colOne} \section{\sffamily{#1}}}
+}
 \newcommand{\jiseca}[1]{
-  \textcolor{\colOne}{\section*{\sffamily{#1}}}
+  {\color{\colOne} \section*{\sffamily{#1}}}
   \addcontentsline{toc}{section}{\sffamily{#1}}
 }
 
-\newcommand{\jissec}[1]{\textcolor{\colTwo}{\subsection{\sffamily{#1}}}}
+%Sub-section
+\newcommand{\jissec}[1]{
+  {\color{\colTwo} \subsection{\sffamily{#1}}}
+}
 \newcommand{\jisseca}[1]{
-  \textcolor{\colTwo}{\subsection*{\sffamily{#1}}}
+  {\color{\colTwo} \subsection*{\sffamily{#1}}}
   \addcontentsline{toc}{subsection}{\sffamily{#1}}
 }
 
-\newcommand{\jisssec}[1]{\textcolor{\colThree}{\subsubsection{\sffamily{#1}}}}
+%Sub-sub-section
+\newcommand{\jisssec}[1]{
+  {\color{\colThree} \subsubsection{\sffamily{#1}}}
+}
 \newcommand{\jissseca}[1]{
-  \textcolor{\colThree}{\subsubsection*{\sffamily{#1}}}
+  {\color{\colThree} \subsubsection*{\sffamily{#1}}}
   \addcontentsline{toc}{subsubsection}{\sffamily{#1}}
 }
 
-\newcommand{\jipar}[1]{\textcolor{\colFour}{\paragraph{\sffamily{#1}}}}
+%Paragraph
+\newcommand{\jipar}[1]{
+  {\color{\colFour} \paragraph{\sffamily{#1}}}
+}
 \newcommand{\jipara}[1]{
-  \textcolor{\colThree}{\paragraph*{\sffamily{#1}}}
+  {\color{\colThree} \paragraph*{\sffamily{#1}}}
   \addcontentsline{toc}{paragraph}{\sffamily{#1}}
 }
 
-\newcommand{\jispar}[1]{\textcolor{\colFour}{\subparagraph{\sffamily{#1}}}}
+%Sub-paragraph
+\newcommand{\jispar}[1]{
+  {\color{\colFour} \subparagraph{\sffamily{#1}}}
+}
 \newcommand{\jispara}[1]{
-  \textcolor{\colThree}{\subparagraph*{\sffamily{#1}}}
+  {\color{\colThree} \subparagraph*{\sffamily{#1}}}
   \addcontentsline{toc}{subparagraph}{\sffamily{#1}}
 }
 
